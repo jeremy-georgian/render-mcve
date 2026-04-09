@@ -24,10 +24,14 @@ task instance. `os.path.exists()` returns `False` and `open()` raises
 
 1. Deploy this repo as a **Workflow** service on Render
 2. Add a secret file named `my_secret.json` with any JSON content
-   (via Dashboard > Environment > Secret Files)
+   (via Dashboard > Environment > Secret Files, or via an env group)
 3. Set env var `MY_SECRET_PATH=/etc/secrets/my_secret.json`
 4. Trigger the `check_secret_file` task from the Dashboard
 5. Check the task run logs — the file will not be found
+
+> **Note:** Secret files cannot be defined in `render.yaml` blueprints,
+> so the secret file must be added manually via the Dashboard after
+> deploying.
 
 ## Environment
 
