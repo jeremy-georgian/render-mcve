@@ -1,3 +1,12 @@
+envGroups:
+  - name: repro-secrets
+    envVars:
+      - key: MY_SECRET_PATH
+        value: /etc/secrets/my_secret.json
+    secretFiles:
+      - name: my_secret.json
+        contents: '{"secret_key": "hello_world"}'
+
 services:
   - type: worker
     runtime: python
@@ -8,8 +17,5 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12.12"
-      - key: MY_SECRET_PATH
-        value: /etc/secrets/my_secret.json
-    secretFiles:
-      - name: my_secret.json
-        contents: '{"secret_key": "hello_world"}'
+    envGroups:
+      - repro-secrets
