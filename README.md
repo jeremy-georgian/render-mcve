@@ -1,5 +1,7 @@
 # Render Workflows: Secret Files Not Available in Task Instances
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jeremy-georgian/render-mcve)
+
 ## Issue
 
 Secret files mounted via env groups or directly on a Workflow service are
@@ -26,14 +28,6 @@ task instance. `os.path.exists()` returns `False` and `open()` raises
 3. Set env var `MY_SECRET_PATH=/etc/secrets/my_secret.json`
 4. Trigger the `check_secret_file` task from the Dashboard
 5. Check the task run logs — the file will not be found
-
-### Deploy to Render
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/YOUR_USERNAME/render-repro)
-
-> **Note:** Blueprints (`render.yaml`) are not yet compatible with
-> Workflows. You may need to create the Workflow service manually in the
-> Dashboard and add the secret file there.
 
 ## Environment
 
