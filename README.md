@@ -16,7 +16,11 @@ just like it is for web services and background workers.
 
 The file at `/etc/secrets/<filename>` does not exist inside the Workflow
 task instance. `os.path.exists()` returns `False` and `open()` raises
-`FileNotFoundError`.
+`Permission denied`.
+
+Task output confirms the file is not accessible:
+
+![Task output showing file_exists: false, file_readable: false](screenshots/task-output.png)
 
 ## Reproduction Steps
 
@@ -24,11 +28,17 @@ task instance. `os.path.exists()` returns `False` and `open()` raises
    (blueprints don't support the workflow type yet)
 2. Link this repo, set build command `pip install -r requirements.txt`,
    start command `python main.py`
+
+   ![Service settings](screenshots/service-settings.png)
+
 3. Add a secret file named `my_secret.json` with any JSON content
    (via Dashboard > Environment > Secret Files, or via an env group)
+
+   ![Env group with secret file](screenshots/env-group.png)
+
 4. Set env var `MY_SECRET_PATH=/etc/secrets/my_secret.json`
 5. Trigger the `check_secret_file` task from the Dashboard
-6. Check the task run logs — the file will not be found
+6. Check the task run output — the file will not be found
 
 ## Environment
 
